@@ -6,7 +6,7 @@
 /*   By: jecombe <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/10 15:52:55 by jecombe      #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/10 15:52:56 by jecombe     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/10 15:56:47 by jecombe     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,14 +23,17 @@ int		ft_change_direction(char *go)
 
 	if (go == NULL)
 	{
+	//if str is NULL, the directory name is the current directory
 		if (getcwd(cwd, sizeof(cwd)) != NULL)
 			go = cwd;
 	}
+	//change directory
 	if (chdir(go) != 0)
 	{
 		perror("chdir()");
 		return (-1);
 	}
+	//print the directory name
 	if (getcwd(cwd2, sizeof(cwd2)) != NULL)
 	{
 		printf("Current directory: %s\n",cwd2);
@@ -43,6 +46,7 @@ int			ft_check_file(char *file)
 {
 	struct stat st;
 
+	//lstat check if file existing
 	if (lstat(file, &st) == 0)
 		return (-1);
 	else
@@ -56,6 +60,7 @@ void		ft_create_directory(char *str)
 		printf("Erreur file existing\n");
 		return ;
 	}
+	//create a folder with name "str"
 	if (mkdir(str,0777) == -1)
 	{
 		printf("Erreur\n");
